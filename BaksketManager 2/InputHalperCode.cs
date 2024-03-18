@@ -23,7 +23,7 @@ public static class InputHelper
     public static bool Input(StringBuilder _text, int _min, int _max, out int inputValue)
     {
         bool result = false;
-        Console.WriteLine(_text);
+        Console.WriteLine(_text); 
 
         if (int.TryParse(Console.ReadLine(), out inputValue))
         {

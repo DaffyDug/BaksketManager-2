@@ -63,16 +63,16 @@ class BasketManager
         if (!int.TryParse(Console.ReadLine(), out int max))
         { Errors.Range(); }
 
-        foreach (var item in products)
+        for (int i = 0; i < products.Count; i++)
         {
+            Product item = products[i];
             if (min <= item.Price && max >= item.Price)
             {
-                Console.WriteLine(item.NameProdurt);
+                Console.WriteLine($"{i + 1}--{item.NameProdurt}");
             }
         }
     }
 }
-
 class AddProduct : ICommandBasket, IInfoEnumCategoryProduct
 {
     public void Run()

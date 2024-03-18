@@ -8,6 +8,6 @@
     {
         NameProdurt = name_product;
         Price = price;
-        this.Category = Category;
+        this.Category = Category; 
     }
 }

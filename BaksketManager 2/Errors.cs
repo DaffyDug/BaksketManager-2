@@ -10,7 +10,7 @@ public static class Errors
     {
         Console.WriteLine(Text);
     }
-    public static void DoubleEmpty()
+    public static void DoubleEmpty() 
     {
         Console.WriteLine(Empty);
     }

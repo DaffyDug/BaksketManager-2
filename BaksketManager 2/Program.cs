@@ -10,7 +10,7 @@ class Program
         new PrintInfo(),
         new PrintInfoCategoryProduct(),
         new GetProductRangePrice()
-        };
+        }; 
         while (true)
         {
             ShowMenu(CommandBaskets);
