@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaksketManager 2", "BaksketManager 2\BaksketManager 2.csproj", "{FC127054-41B0-472C-8EAA-5DD4119550E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC127054-41B0-472C-8EAA-5DD4119550E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC127054-41B0-472C-8EAA-5DD4119550E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC127054-41B0-472C-8EAA-5DD4119550E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC127054-41B0-472C-8EAA-5DD4119550E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE384452-9FB0-4EC7-8C54-00F00E025FBB}
+	EndGlobalSection
+EndGlobal
