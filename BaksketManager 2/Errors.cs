@@ -1,9 +1,10 @@
 ﻿using System;
 public static class Errors
 {
-    private const string Text = "нельзя воодить пустые символы";
+    private const string Text = "";
     private const string Empty = "пусто!";
     private const string NotThisRange = "нету такого диапозона!";
+    private const string FailedRemoveProduct = "не удалось удалить продукт";
 
 
     public static void DoubleText()
@@ -18,5 +19,8 @@ public static class Errors
     {
         Console.WriteLine(NotThisRange);
     }
-
+    public static void RemoveProduct()
+    {
+        Console.WriteLine(FailedRemoveProduct);
+    }
 }

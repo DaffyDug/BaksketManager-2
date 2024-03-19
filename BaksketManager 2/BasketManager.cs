@@ -42,12 +42,19 @@ class BasketManager
     {
         return products.Count;
     }
+
+    public CurrentDictionary _TEXT = CurrentDictionary.Instance;
+
     public void PrintProductInfo(int index)
     {
         var nameproduct = BasketManager.basketManager.products[index - 1].NameProdurt;
         var priceproduct = BasketManager.basketManager.products[index - 1].Price;
         var category = BasketManager.basketManager.products[index - 1].Category;
-        Console.WriteLine($"имя продукта: {nameproduct}\nцена продукта: {priceproduct}\nкатегория продукта: {category}");
+        #region выводит на экран имя, цену, категорию - продукта
+        Console.WriteLine($"{_TEXT.GetDictionaryValue("KeyNameProduct")} {nameproduct}" +
+            $"{_TEXT.GetDictionaryValue("KeyPriceProduct")} {priceproduct}" +
+            $" {_TEXT.GetDictionaryValue("KeyCategoryProduct")} {category}");
+        #endregion
     }
     public List<Product> GetListProduct()
     {
@@ -55,11 +62,11 @@ class BasketManager
     }
     public void GetProductRangePrice()
     {
-        Console.WriteLine("введите минимальный диапозон продукта: \n");
+        Console.WriteLine($"{_TEXT.GetDictionaryValue("KeyInputMinRangeProduct")}");
         if (!int.TryParse(Console.ReadLine(), out int min))
         { Errors.Range(); }
 
-        Console.WriteLine("введите максимальный диапозон продукта: \n");
+        Console.WriteLine($"{_TEXT.GetDictionaryValue("KeyInputMaxRangeProduct")}");
         if (!int.TryParse(Console.ReadLine(), out int max))
         { Errors.Range(); }
 
@@ -77,27 +84,26 @@ class AddProduct : ICommandBasket, IInfoEnumCategoryProduct
 {
     public void Run()
     {
-        Console.WriteLine("\nвведите название продукта: ");
+        Console.WriteLine($"{BasketManager.basketManager._TEXT.GetDictionaryValue("KeyNameProduct")}");
         string nameproduct = Console.ReadLine();
-        Console.WriteLine("введите цену продука: ");
-
+        Console.WriteLine($"{BasketManager.basketManager._TEXT.GetDictionaryValue("KeyPriceProduct")}");
         if (!int.TryParse(Console.ReadLine(), out int value))
         {
             Errors.DoubleText();
             return;
         } // проверка на на адекватный ввод
-        Console.WriteLine("выберите катергорию продукта: \n");
+        Console.WriteLine($"{BasketManager.basketManager._TEXT.GetDictionaryValue("KeyCategoryProduct")}");
         ShowEnumCategoryProduct(); //выводит категории продуктов 
 
         Array colection = Enum.GetValues(typeof(CategoryProduct));
-        if (InputHelper.Input("\nкакую котегорию хотите выбрать? ", 1, colection.Length, out int value2))
+        if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatCategoryInput"), 1, colection.Length, out int value2))
         {
             CategoryProduct categoryProduct = (CategoryProduct)value2;
             if (!string.IsNullOrEmpty(nameproduct))
             {
                 Product Product = new Product(nameproduct, value, categoryProduct);
                 BasketManager.basketManager.Add(Product);
-                Console.WriteLine("\nпродукт добавлен\n");
+                Console.WriteLine($"{BasketManager.basketManager._TEXT.GetDictionaryValue("KeyAddProductCompleted")}");
             }
             else
             {
@@ -121,14 +127,14 @@ class RemoveProduct : ICommandBasket
     public void Run()
     {
         BasketManager.basketManager.PrintInfo();    //
-        if (InputHelper.Input("\nкакой продукт вы хотите удалить: ", 1, BasketManager.basketManager.GetCountList(), out int intvalue))
+        if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatProductWhantRemove"), 1, BasketManager.basketManager.GetCountList(), out int intvalue))
         {
             BasketManager.basketManager.Remuve(intvalue - 1);
-            Console.WriteLine("\nпродукт удален\n");
+            Console.WriteLine($"{BasketManager.basketManager._TEXT.GetDictionaryValue("KeyARemoveProductCompleted")}");
         }
         else
         {
-            Console.WriteLine("\nне удалось удалить продукт\n");
+            Errors.RemoveProduct();
         }
     }
 }
@@ -141,7 +147,7 @@ class PrintInfo : ICommandBasket
             BasketManager.basketManager.PrintInfo();
             if (BasketManager.basketManager.GetCountList() > 0)
             {
-                if (InputHelper.Input("\nо каком продукте вы хотите узнать информацию:\n ", 1, BasketManager.basketManager.GetCountList(), out int inputvalue))
+                if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatProductWhantCheckInformation"), 1, BasketManager.basketManager.GetCountList(), out int inputvalue))
                 {
                     BasketManager.basketManager.PrintProductInfo(inputvalue);
                 }
@@ -161,7 +167,7 @@ class PrintInfoCategoryProduct : ICommandBasket
         if (BasketManager.basketManager.GetCountList() != 0)
         {
             BasketManager.basketManager.PrintInfoCategoryProduct();
-            if (InputHelper.Input("Выберите категорию о которой хотите получить инфу: \n", 1, collection.Length, out int inputvalue))
+            if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatCategoryWhantCheckInformation"), 1, collection.Length, out int inputvalue))
             {
                 List<string> Products = new List<string>();
                 foreach (var item in BasketManager.basketManager.GetListProduct())

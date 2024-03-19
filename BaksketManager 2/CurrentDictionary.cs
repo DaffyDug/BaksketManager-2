@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 
 
-class CurrentDictionary : ICommandBasket
+public class CurrentDictionary : ICommandBasket
 {
-    public static readonly CurrentDictionary class1;
+    public static readonly CurrentDictionary Instance;
     public Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
     private CurrentDictionary()
     { }
     static CurrentDictionary()
     {
-        class1 = new CurrentDictionary();
+        Instance = new CurrentDictionary();
     }
     public string GetDictionaryValue(string stringKey)
     {
@@ -19,14 +19,7 @@ class CurrentDictionary : ICommandBasket
 
     public void SetLeocale(string language)
     {
-        if (language == "RU")
-        {
-            keyValuePairs = Locales.Locales_RU;
-        }
-        else if (language == "EN")
-        {
-            keyValuePairs = Locales.Locales_EN;
-        }
+        keyValuePairs = Locales.GetLocale(language);
     }
 
     public void Run()
@@ -59,24 +52,58 @@ class CurrentDictionary : ICommandBasket
         }
     }
 }
-static class Locales
+public static class Locales
 {
-    public static Dictionary<string, string> Locales_RU = new Dictionary<string, string>()
+    private static Dictionary<string, string> Locales_RU = new Dictionary<string, string>()
     {
+#region методы
         { "KeyAddProduct","Добавить продукт" },
         { "KeyRemoveProduct","Удалить продукт" },
         { "KeyPrintInfoProducts","Информация о продуктах" },
         { "KeyPrintInfoProductsCategory","Информация о продуктах по категории" },
         { "KeyPrintInfoProductsPrice","Информация о продуктах по цене" },
+#endregion
+#region ввод данных
+        {"KeyNameProduct","имя продукта: " },
+        {"KeyPriceProduct","\nцена продукта: " },
+        {"KeyCategoryProduct","\nкатегория продукта: " },
+        {"KeyInputMinRangeProduct","введите минимальный диапозон продукта: \n" },
+        {"KeyInputMaxRangeProduct","введите максимальный диапозон продукта: \n" },
+        {"KeyWhatCategoryInput","\nкакую котегорию хотите выбрать? " },
+        {"KeyWhatProductWhantRemove","\nкакой продукт вы хотите удалить: " },
+        {"KeyWhatProductWhantCheckInformation","\nо каком продукте вы хотите узнать информацию:\n " },
+        {"KeyWhatCategoryWhantCheckInformation","Выберите категорию о которой хотите получить инфу: \n" },
+        {"KeyWhatWillDo","выберите что вы будете делать: " },
+#endregion
+#region завершенные выводы
+        {"KeyAddProductCompleted","\nпродукт добавлен\n" },
+        {"KeyARemoveProductCompleted","\nпродукт удален\n" },
+        #endregion
+        #region ошибки
+        {"","нельзя воодить пустые символы" },
+#endregion
     };
-    public static Dictionary<string, string> Locales_EN = new Dictionary<string, string>()
+    private static Dictionary<string, string> Locales_EN = new Dictionary<string, string>()
     {
         { "KeyAddProduct","Add a product" },
         { "KeyRemoveProduct","Remove a product" },
         { "KeyPrintInfoProducts","Information a products" },
         { "KeyPrintInfoProductsCategory","Product information by category" },
         { "KeyPrintInfoProductsPrice","Product information by price" },
+
     };
+
+    public static Dictionary<string, string> GetLocale(string locale)
+    {
+        if (locale == "RU")
+        {
+            return Locales_RU;
+        }
+        else
+        {
+            return Locales_EN;
+        }
+    }
 };
 public enum Language
 {

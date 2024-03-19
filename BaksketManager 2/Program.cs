@@ -3,18 +3,21 @@ class Program
 {
     static void Main(string[] args)
     {
+        CurrentDictionary.Instance.SetLeocale("RU");
+
         ICommandBasket[] CommandBaskets = new ICommandBasket[]
         {
         new AddProduct(),
         new RemoveProduct(),
         new PrintInfo(),
         new PrintInfoCategoryProduct(),
-        new GetProductRangePrice()
+        new GetProductRangePrice(),
+        CurrentDictionary.Instance,
         }; 
         while (true)
         {
             ShowMenu(CommandBaskets);
-            if (InputHelper.Input("выберите что вы будете делать: ", 1, CommandBaskets.Length, out int inputvalue))
+            if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatWillDo"), 1, CommandBaskets.Length, out int inputvalue))
             {
                 CommandBaskets[inputvalue - 1].Run();
             }
