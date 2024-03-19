@@ -4,7 +4,6 @@ class Program
     static void Main(string[] args)
     {
         CurrentDictionary.Instance.SetLeocale("RU");
-
         ICommandBasket[] CommandBaskets = new ICommandBasket[]
         {
         new AddProduct(),
@@ -17,7 +16,7 @@ class Program
         while (true)
         {
             ShowMenu(CommandBaskets);
-            if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue("KeyWhatWillDo"), 1, CommandBaskets.Length, out int inputvalue))
+            if (InputHelper.Input(BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeyWhatWillDo), 1, CommandBaskets.Length, out int inputvalue))
             {
                 CommandBaskets[inputvalue - 1].Run();
             }
@@ -28,7 +27,7 @@ class Program
         for (int i = 0; i < CommandBaskets.Length; i++)
         {
             ICommandBasket item = CommandBaskets[i];
-            Console.WriteLine($"{i + 1}--{item}");
+            Console.WriteLine($"{i + 1}--{item.Description}");
         }
     }
 }

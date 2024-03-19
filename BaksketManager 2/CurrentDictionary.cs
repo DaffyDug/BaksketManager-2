@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
 public class CurrentDictionary : ICommandBasket
 {
     public static readonly CurrentDictionary Instance;
-    public Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+    public Dictionary<Keys, string> keyValuePairs = new Dictionary<Keys, string>();
+    public string Description => BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeySettingsForTranslateProgramm);
     private CurrentDictionary()
     { }
     static CurrentDictionary()
     {
         Instance = new CurrentDictionary();
     }
-    public string GetDictionaryValue(string stringKey)
+    public string GetDictionaryValue(Keys keys)
     {
-        return keyValuePairs[stringKey];
+        return keyValuePairs[keys];
     }
-
     public void SetLeocale(string language)
     {
         keyValuePairs = Locales.GetLocale(language);
     }
-
     public void Run()
     {
         Array collection = Enum.GetValues(typeof(Language));
@@ -52,48 +49,76 @@ public class CurrentDictionary : ICommandBasket
         }
     }
 }
+
 public static class Locales
 {
-    private static Dictionary<string, string> Locales_RU = new Dictionary<string, string>()
+    private static Dictionary<Keys, string> Locales_RU = new Dictionary<Keys, string>()
     {
-#region методы
-        { "KeyAddProduct","Добавить продукт" },
-        { "KeyRemoveProduct","Удалить продукт" },
-        { "KeyPrintInfoProducts","Информация о продуктах" },
-        { "KeyPrintInfoProductsCategory","Информация о продуктах по категории" },
-        { "KeyPrintInfoProductsPrice","Информация о продуктах по цене" },
-#endregion
-#region ввод данных
-        {"KeyNameProduct","имя продукта: " },
-        {"KeyPriceProduct","\nцена продукта: " },
-        {"KeyCategoryProduct","\nкатегория продукта: " },
-        {"KeyInputMinRangeProduct","введите минимальный диапозон продукта: \n" },
-        {"KeyInputMaxRangeProduct","введите максимальный диапозон продукта: \n" },
-        {"KeyWhatCategoryInput","\nкакую котегорию хотите выбрать? " },
-        {"KeyWhatProductWhantRemove","\nкакой продукт вы хотите удалить: " },
-        {"KeyWhatProductWhantCheckInformation","\nо каком продукте вы хотите узнать информацию:\n " },
-        {"KeyWhatCategoryWhantCheckInformation","Выберите категорию о которой хотите получить инфу: \n" },
-        {"KeyWhatWillDo","выберите что вы будете делать: " },
-#endregion
-#region завершенные выводы
-        {"KeyAddProductCompleted","\nпродукт добавлен\n" },
-        {"KeyARemoveProductCompleted","\nпродукт удален\n" },
+        #region методы
+                { Keys.KeyAddProduct,"Добавить продукт" },
+                { Keys.KeyRemoveProduct,"Удалить продукт" },
+                { Keys.KeyPrintInfoProducts,"Информация о продуктах" },
+                { Keys.KeyPrintInfoProductsCategory,"Информация о продуктах по категории" },
+                { Keys.KeyPrintInfoProductsPrice,"Информация о продуктах по цене" },
+                { Keys.KeySettingsForTranslateProgramm,"настройки для переводв программы" },
+        #endregion
+        #region ввод данных
+                {Keys.KeyNameProduct,"имя продукта: " },
+                {Keys.KeyPriceProduct,"\nцена продукта: " },
+                {Keys.KeyCategoryProduct,"\nкатегория продукта: " },
+                {Keys.KeyInputMinRangeProduct,"введите минимальный диапозон продукта: \n" },
+                {Keys.KeyInputMaxRangeProduct,"введите максимальный диапозон продукта: \n" },
+                {Keys.KeyWhatCategoryInput,"\nкакую котегорию хотите выбрать? " },
+                {Keys.KeyWhatProductWhantRemove,"\nкакой продукт вы хотите удалить: " },
+                {Keys.KeyWhatProductWhantCheckInformation,"\nо каком продукте вы хотите узнать информацию:\n " },
+                {Keys.KeyWhatCategoryWhantCheckInformation,"Выберите категорию о которой хотите получить инфу: \n" },
+                {Keys.KeyWhatWillDo,"выберите что вы будете делать: " },
+        #endregion
+        #region завершенные выводы
+                {Keys.KeyAddProductCompleted,"\nпродукт добавлен\n" },
+                {Keys.KeyARemoveProductCompleted,"\nпродукт удален\n" },
         #endregion
         #region ошибки
-        {"","нельзя воодить пустые символы" },
-#endregion
+                {Keys.KeyCannotEnterEmptyCharacters,"нельзя воодить пустые символы" },
+                {Keys.KeyEmpty,"пусто!" },
+                {Keys.KeyNotThisRange,"нету такого диапозона!" },
+                {Keys.KeyFailedRemoveProduct,"не удалось удалить продукт" }
+        #endregion
     };
-    private static Dictionary<string, string> Locales_EN = new Dictionary<string, string>()
+    private static Dictionary<Keys, string> Locales_EN = new Dictionary<Keys, string>()
     {
-        { "KeyAddProduct","Add a product" },
-        { "KeyRemoveProduct","Remove a product" },
-        { "KeyPrintInfoProducts","Information a products" },
-        { "KeyPrintInfoProductsCategory","Product information by category" },
-        { "KeyPrintInfoProductsPrice","Product information by price" },
-
+        #region методы
+                { Keys.KeyAddProduct,"Add a product" },
+                { Keys.KeyRemoveProduct,"Remove a product" },
+                { Keys.KeyPrintInfoProducts,"Information a products" },
+                { Keys.KeyPrintInfoProductsCategory,"Product information by category" },
+                { Keys.KeyPrintInfoProductsPrice,"Product information by price" },
+                {Keys.KeySettingsForTranslateProgramm,"Settings For Translate Programm" },
+                #endregion
+        #region ввод данных
+                {Keys.KeyNameProduct,"Name Product: " },
+                {Keys.KeyPriceProduct,"\nPrice Product: " },
+                {Keys.KeyCategoryProduct,"\nCategory Product: " },
+                {Keys.KeyInputMinRangeProduct,"Input Min Range Product: \n" },
+                {Keys.KeyInputMaxRangeProduct,"Input Max Range Product: \n" },
+                {Keys.KeyWhatCategoryInput,"\nWhat Category Input? " },
+                {Keys.KeyWhatProductWhantRemove,"\nWhat Product Whant Remove: " },
+                {Keys.KeyWhatProductWhantCheckInformation,"\nWhat Product Whant Check Information:\n " },
+                {Keys.KeyWhatCategoryWhantCheckInformation,"What Category Whant Check Information: \n" },
+                {Keys.KeyWhatWillDo,"What Will Do: " },
+                #endregion
+        #region завершенные выводы
+                {Keys.KeyAddProductCompleted,"\nAdd Product Completed\n" },
+                {Keys.KeyARemoveProductCompleted,"\nARemove Product Completed\n" },
+                #endregion
+        #region ошибки
+                {Keys.KeyCannotEnterEmptyCharacters,"Cannot Enter Empty Characters" },
+                {Keys.KeyEmpty,"Empty!" },
+                {Keys.KeyNotThisRange,"Not This Range!" },
+                {Keys.KeyFailedRemoveProduct,"Failed Remove Product" }
+                #endregion
     };
-
-    public static Dictionary<string, string> GetLocale(string locale)
+    public static Dictionary<Keys, string> GetLocale(string locale)
     {
         if (locale == "RU")
         {

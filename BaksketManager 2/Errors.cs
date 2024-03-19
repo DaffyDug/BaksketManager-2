@@ -1,26 +1,20 @@
 ﻿using System;
 public static class Errors
 {
-    private const string Text = "";
-    private const string Empty = "пусто!";
-    private const string NotThisRange = "нету такого диапозона!";
-    private const string FailedRemoveProduct = "не удалось удалить продукт";
-
-
     public static void DoubleText()
     {
-        Console.WriteLine(Text);
+        Console.WriteLine(BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeyCannotEnterEmptyCharacters));
     }
     public static void DoubleEmpty() 
     {
-        Console.WriteLine(Empty);
+        Console.WriteLine(BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeyEmpty));
     }
     public static void Range()
     {
-        Console.WriteLine(NotThisRange);
+        Console.WriteLine(BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeyNotThisRange));
     }
     public static void RemoveProduct()
     {
-        Console.WriteLine(FailedRemoveProduct);
+        Console.WriteLine(BasketManager.basketManager._TEXT.GetDictionaryValue(Keys.KeyFailedRemoveProduct));
     }
 }
